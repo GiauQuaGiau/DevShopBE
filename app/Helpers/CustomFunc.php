@@ -15,6 +15,4 @@ if (!function_exists('getCurrentUser')) {
     {
        return auth()->user();
     }
-
-   
 }

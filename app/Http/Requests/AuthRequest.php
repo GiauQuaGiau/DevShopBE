@@ -39,7 +39,7 @@ class AuthRequest extends FormRequest
     public function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json([
             'status' => false,
-            'message' => 'Validation Errors',
+            'message' => 'Dữ liệu không đúng định dạng',
             'data' => $validator->errors(),
         ], 422));
     }

@@ -25,16 +25,15 @@ class AuthController extends Controller
             ];
             $remember = $request->input('remember');
 
-            $response = $authAction->login($credentials, $remember);
-            return response()->json($response, 200);
-            
+            return $response = $authAction->login($credentials, $remember);
+            // return response()->json($response, 200);
         } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Có xẩy ra lỗi khi đăng nhập',
-                'code' => HttpStatusCodes::INTERNAL_SERVER_ERROR,
-                'error' => $th->getMessage()
-            ], 200);
+            return HttpStatusCodes::responseError(
+                'Có xẩy ra lỗi khi đăng nhập',
+                HttpStatusCodes::INTERNAL_SERVER_ERROR,
+                $th,
+                __METHOD__
+            );
         }
     }
 

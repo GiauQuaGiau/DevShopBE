@@ -11,9 +11,6 @@ class AuthAction extends User
 {
     public function login($credentials, $remember = false)
     {
-
-
-
         try {
             if ($remember) {
                 $token = auth()->setTTL(env('JWT_TimeLifeRemember'))->attempt($credentials);
@@ -22,19 +19,17 @@ class AuthAction extends User
             }
             return $this->createResponse($token);
         } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Có xẩy ra lỗi khi đăng nhập',
-                'code' => HttpStatusCodes::INTERNAL_SERVER_ERROR,
-                'error' => __METHOD__ . ": " . $th->getMessage()
-            ], 200);
+            return HttpStatusCodes::responseError(
+                'Có xẩy ra lỗi khi đăng nhập',
+                HttpStatusCodes::INTERNAL_SERVER_ERROR,
+                $th,
+                __METHOD__
+            );
         }
     }
 
     public function createResponse($token)
     {
-
-
         try {
             $data = [];
             // dd($token);
@@ -54,14 +49,14 @@ class AuthAction extends User
                     'error' => "UNAUTHORIZED",
                 ];
             }
-            return $data;
+            return response()->json($data, 200)->cookie('token', $token, auth()->factory()->getTTL());
         } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Có xẩy ra lỗi khi đăng nhập',
-                'code' => HttpStatusCodes::INTERNAL_SERVER_ERROR,
-                'error' => __METHOD__ . ": " . $th->getMessage()
-            ], 200);
+            return HttpStatusCodes::responseError(
+                'Có xẩy ra lỗi khi đăng nhập',
+                HttpStatusCodes::INTERNAL_SERVER_ERROR,
+                $th,
+                __METHOD__
+            );
         }
     }
 }

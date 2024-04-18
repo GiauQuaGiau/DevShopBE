@@ -35,4 +35,17 @@ class HttpStatusCodes
     // static function createResponse($data, $status = self::OK, $header = []) {
     //     return response()->json($data, $status, $header);
     // }
+    public static function responseError($message, $httpCode, $th, $methodError = null)
+    {
+        $response = [
+            'status' => false,
+            'message' => $message,
+            'code' => $httpCode,
+            'error' => [
+                'contentError' => $th->getMessage(),
+                'where' => $methodError
+            ]
+        ];
+        return response()->json($response, 200, []);
+    }
 }
