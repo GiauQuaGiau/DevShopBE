@@ -49,7 +49,12 @@ class AuthAction extends User
                     'error' => "UNAUTHORIZED",
                 ];
             }
-            return response()->json($data, 200)->cookie('token', $token, auth()->factory()->getTTL());
+            return response()->json($data, 200)
+                             ->cookie(
+                                'token', 
+                                $token, 
+                                auth()->factory()->getTTL() 
+                             );
         } catch (\Throwable $th) {
             return HttpStatusCodes::responseError(
                 'Có xẩy ra lỗi khi đăng nhập',
