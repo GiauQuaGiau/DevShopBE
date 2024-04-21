@@ -18,6 +18,7 @@ class AuthDTO {
             'username' => $user->username,
             'email' => $user->email,
             'role' => $user->role,
+            'lang' => $user->lang,
             // 'email_verified_at' => $user->email_verified_at ? $user->email_verified_at : null,
             // 'created_at' => Carbon::parse($user->created_at)->format('Y-m-d'),
             'created_at' => Carbon::parse($user->created_at)->format('Y-m-d'),

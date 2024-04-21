@@ -26,7 +26,9 @@ return new class extends Migration
             $table->string('username', 100)->unique();
             $table->string('email', 100)->unique();
             $table->string('password', 200);
-            $table->string('role')->default('customer');
+            // $table->string('role')->default('customer');
+            $table->string('role')->default(2); //customer
+            $table->string('lang', 10)->default('en');
             // 
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

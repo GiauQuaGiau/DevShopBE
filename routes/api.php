@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Config\AppController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -49,5 +50,20 @@ Route::group([
         'middleware' => 'api',
     ], function () {       
         Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/set-language', [AuthController::class, 'setLanguage']);
     });
 });
+
+Route::group([
+    'prefix' => 'config'
+],function () {
+    
+    Route::group([
+        'middleware' => 'api',
+    ], function () {       
+        Route::put('/set-language', [AppController::class, 'setLanguage']);
+        Route::get('/get-menu', [AppController::class, 'getMenu']);
+    });
+});
+

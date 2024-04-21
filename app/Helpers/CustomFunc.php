@@ -1,5 +1,8 @@
 <?php
 // namespace App\Helpers;
+
+use Illuminate\Support\Arr;
+
 if (!function_exists('isEmail')) {
     function isEmail($email)
     {
@@ -14,5 +17,11 @@ if (!function_exists('getCurrentUser')) {
     function getCurrentUser()
     {
        return auth()->user();
+    }
+}
+if (!function_exists('array_get')) {
+    function array_get($array, $key, $default = null)
+    {
+        return Arr::get($array, $key, $default);
     }
 }
