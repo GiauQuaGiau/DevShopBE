@@ -20,7 +20,7 @@ class AuthAction extends User
             return $this->createResponse($token);
         } catch (\Throwable $th) {
             return HttpStatusCodes::responseError(
-                'Có xẩy ra lỗi khi đăng nhập',
+                'errorLogin',
                 HttpStatusCodes::INTERNAL_SERVER_ERROR,
                 $th,
                 __METHOD__
@@ -57,7 +57,7 @@ class AuthAction extends User
                              );
         } catch (\Throwable $th) {
             return HttpStatusCodes::responseError(
-                'Có xẩy ra lỗi khi đăng nhập',
+                'errorLogin',
                 HttpStatusCodes::INTERNAL_SERVER_ERROR,
                 $th,
                 __METHOD__

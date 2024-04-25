@@ -29,7 +29,7 @@ class AuthController extends Controller
             // return response()->json($response, 200);
         } catch (\Throwable $th) {
             return HttpStatusCodes::responseError(
-                'Có xẩy ra lỗi khi đăng nhập',
+                'errorLogin',
                 HttpStatusCodes::INTERNAL_SERVER_ERROR,
                 $th,
                 __METHOD__
