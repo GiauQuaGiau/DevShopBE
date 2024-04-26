@@ -198,7 +198,7 @@ class DefaultMenu extends Seeder
                     'en' => 'Dashboard'
                 ],
                 'icon' => 'pi pi-home',
-                'linkTo' => '/dashboard',
+                'linkTo' => '/admin/dashboard',
                 'child' => []
             ],
             [
@@ -255,7 +255,7 @@ class DefaultMenu extends Seeder
                             'vi' => 'Quản Lý Tài Khoản',
                             'en' => 'User Management'
                         ],
-                        'linkTo' => "/user-management",
+                        'linkTo' => "/admin/user-management",
                         'status' => false
                     ],
                     [

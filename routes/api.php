@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Config\AppController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Laravel\Sanctum\Sanctum;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +66,16 @@ Route::group([
     ], function () {       
         Route::put('/set-language', [AppController::class, 'setLanguage']);
         Route::get('/get-menu', [AppController::class, 'getMenu']);
+    });
+});
+
+Route::group([
+    'prefix' => 'admin'
+],function () {
+    Route::group([
+        'middleware' => 'api',
+    ], function () {       
+        Route::get('administration/user/list', [UserController::class, 'getUserList']);
     });
 });
 

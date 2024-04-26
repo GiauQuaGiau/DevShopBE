@@ -20,7 +20,7 @@ class AuthAction extends User
             return $this->createResponse($token);
         } catch (\Throwable $th) {
             return HttpStatusCodes::responseError(
-                'errorLogin',
+                'loginFailed',
                 HttpStatusCodes::INTERNAL_SERVER_ERROR,
                 $th,
                 __METHOD__
@@ -37,7 +37,7 @@ class AuthAction extends User
                 $data = [
                     'status' => true,
                     'user' => AuthDTO::current_user(auth()->user()),
-                    'message' => 'Đăng nhập thành công',
+                    'message' => 'loginSuccess',
                     'token' => "bearer $token",
                     'expires_in' => auth()->factory()->getTTL() * 60,
                     'code' => HttpStatusCodes::OK
@@ -45,7 +45,7 @@ class AuthAction extends User
             } else {
                 $data = [
                     'status' => false,
-                    'message' => 'Tên tài khoản hoặc mật khẩu không chính xác',
+                    'message' => 'UNAUTHORIZED',
                     'error' => "UNAUTHORIZED",
                 ];
             }
@@ -57,7 +57,7 @@ class AuthAction extends User
                              );
         } catch (\Throwable $th) {
             return HttpStatusCodes::responseError(
-                'errorLogin',
+                'loginFailed',
                 HttpStatusCodes::INTERNAL_SERVER_ERROR,
                 $th,
                 __METHOD__
