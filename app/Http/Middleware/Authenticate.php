@@ -12,12 +12,14 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : route('login');
+        return $request->expectsJson() ? null : route('login.page');
     }
-    // protected function handle($request, Closure $next)
+    // public function handle($request, Closure $next)
     // {
     //     return $next($request)
     //         ->header('Access-Control-Allow-Origin', '*')
+    //         ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization, application/json')
     //         ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     // }
+    
 }

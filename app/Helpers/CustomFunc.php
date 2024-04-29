@@ -25,3 +25,12 @@ if (!function_exists('array_get')) {
         return Arr::get($array, $key, $default);
     }
 }
+
+if (!function_exists('removeNullOrEmptyString')) {
+    function removeNullOrEmptyString(array $input)
+    {
+        return array_filter($input, function ($v) {
+            return $v !== null && $v !== '';
+        }, ARRAY_FILTER_USE_BOTH);
+    }
+}

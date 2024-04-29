@@ -13,7 +13,6 @@ class AppController extends Controller
 {
     public function setLanguage(Request $request)
     {
-        // getCurrentUser();
         try {
             if ($user = getCurrentUser()) {
                 $user->lang = $request->input('lang') ? $request->input('lang') : $user->lang;
@@ -37,8 +36,9 @@ class AppController extends Controller
     public function getMenu(Request $request)
     {
         try {
-            $lang = $request->input('lang') ? $request->input('lang') : 'vi';
-            // if ($user = getCurrentUser()) {
+            // $lang = $request->input('lang') ? $request->input('lang') : 'vi';
+            $user = getCurrentUser();
+            $lang = $user ? $user->lang: 'vi';
             $data = menu::all()->toArray();
             $menu = [];
             // dd($data);

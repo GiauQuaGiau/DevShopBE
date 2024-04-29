@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-    }
     public function login(AuthRequest $request, AuthAction $authAction)
     {
         try {
@@ -26,7 +23,6 @@ class AuthController extends Controller
             $remember = $request->input('remember');
 
             return $response = $authAction->login($credentials, $remember);
-            // return response()->json($response, 200);
         } catch (\Throwable $th) {
             return HttpStatusCodes::responseError(
                 'loginFailed',
@@ -39,8 +35,9 @@ class AuthController extends Controller
 
     public function logout()
     {
+        auth()->logout(true);
         return response()->json([
-            'status' => auth()->logout(true),
+            'status' => true,
             'message' => 'Đăng xuất thành công'
         ]);
     }

@@ -17,12 +17,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 // Sanctum::routes();
-
-
 
 Route::get('/', function () {
     $dbName = "Can't connect to Database";
@@ -43,39 +42,31 @@ Route::get('/', function () {
     ];
     return response()->json($data, 200);
 });
+Route::get('/login', function () {
+    return response()->json(['message' => 'Please Pogin', 'error' => 'UNAUTHORIZED'], 401);
+})->name('login.page');
 
 Route::group([
     'prefix' => 'auth'
-],function () {
-    
-    Route::group([
-        'middleware' => 'api',
-    ], function () {       
+], function () {
+
+    Route::group([], function () {
         Route::post('/login', [AuthController::class, 'login']);
         Route::post('/logout', [AuthController::class, 'logout']);
-        Route::post('/set-language', [AuthController::class, 'setLanguage']);
     });
 });
 
 Route::group([
-    'prefix' => 'config'
-],function () {
-    
-    Route::group([
-        'middleware' => 'api',
-    ], function () {       
-        Route::put('/set-language', [AppController::class, 'setLanguage']);
-        Route::get('/get-menu', [AppController::class, 'getMenu']);
-    });
+    'prefix' => 'config',
+    'middleware' => ['auth'],
+], function () {
+    Route::put('/set-language', [AppController::class, 'setLanguage']);
+    Route::get('/get-menu', [AppController::class, 'getMenu']);
 });
 
 Route::group([
-    'prefix' => 'admin'
-],function () {
-    Route::group([
-        'middleware' => 'api',
-    ], function () {       
-        Route::get('administration/user/list', [UserController::class, 'getUserList']);
-    });
+    'prefix' => 'admin',
+    'middleware' => ['auth'],
+], function () {
+    Route::get('administration/user/list', [UserController::class, 'getUserList']);
 });
-
