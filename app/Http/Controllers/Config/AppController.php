@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Config;
 
 use App\Helpers\HttpStatusCodes;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MenuResource;
 use App\Models\menu;
 use Illuminate\Http\Request;
 

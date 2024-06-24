@@ -31,8 +31,15 @@ class UserAction extends User
         if ($keyword = array_get($input, 'address')) {
             $query->where('address', $keyword);
         }
-        if ($keyword = array_get($input, 'gender')) {
-            $query->where('gender', $keyword);
+        // dd();
+        if (array_get($input, 'gender')) {
+            if (array_get($input, 'gender') == 'male') {
+                $value = 0;
+            }
+            if (array_get($input, 'gender') == 'female') {
+                $value = 1;
+            }
+            $query->where('gender', $value);
         }
         if ($keyword = array_get($input, 'email')) {
             $query->where('email', $keyword);
@@ -40,21 +47,47 @@ class UserAction extends User
         if ($keyword = array_get($input, 'username')) {
             $query->where('username', $keyword);
         }
-        if ($keyword = array_get($input, 'status')) {
-            $query->where('status', $keyword);
+        if (array_get($input, 'status')) {
+            if (array_get($input, 'status') == 'inactive') {
+                $value = 0;
+            }
+            if (array_get($input, 'status') == 'active') {
+                $value = 1;
+            }
+            $query->where('status', $value);
         }
         // export
         if (array_get($input, 'export') && array_get($input, 'export') == 1) {
             return $this->exportUserList($query->get());
         }
+        if (array_get($input, 'sort')) {
+            $column = array_key_first(array_get($input, 'sort'));
+            $value = array_get($input, 'sort')[$column];
+            $query->orderBy($column, $value);
+        }
+        $limit = 10;
+        if (array_get($input, 'limit')) {
+            $limit = array_get($input, 'limit');
+        }
 
+        // return response()->json($query->paginate($limit)); 
+        $listUsers = $query->paginate($limit);
         $data = [
             'status' => true,
-            'users' => AdminUserResource::collection($query->get())
+            'users' => AdminUserResource::collection($listUsers),
+            // 'links' => $listUsers->links()->toArray(),
+            'meta' => [
+                'current_page' => $listUsers->currentPage(),
+                'from_item' => $listUsers->firstItem(),
+                'to_item' => $listUsers->lastItem(),
+                'items_in_page' => $listUsers->perPage(),
+                'total_items' => $listUsers->total(),
+                'totalPage' => ceil($listUsers->total() / $listUsers->perPage()),
+            ],
         ];
         return response()->json($data);
     }
-    
+
     public function exportUserList($data)
     {
         return response()->json(['message' => 'export user list']);

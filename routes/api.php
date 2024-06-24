@@ -39,7 +39,7 @@ Route::get('/', function () {
         'Php' => "Current php version: " . phpversion(),
         'Framework' => "Laravel Framework version: " . app()->version(),
         'DbName' => $dbName,
-    ];
+    ];  
     return response()->json($data, 200);
 });
 Route::get('/login', function () {
@@ -69,4 +69,5 @@ Route::group([
     'middleware' => ['auth'],
 ], function () {
     Route::get('administration/user/list', [UserController::class, 'getUserList']);
+    Route::post('administration/user/list/new-user', [UserController::class, 'createUser']);
 });

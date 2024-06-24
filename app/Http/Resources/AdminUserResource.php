@@ -17,11 +17,12 @@ class AdminUserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'firstname' => $this->firstname,
-            'middlename' => $this->middlename,
-            'lastname' => $this->lastname,
+            // 'firstname' => $this->firstname,
+            // 'middlename' => $this->middlename,
+            // 'lastname' => $this->lastname,
+            'name' => $this->lastname . ' ' .$this->firstname,
             'phone' => $this->phone,
-            'avata' => $this->avata ? asset($this->avata) : null,
+            // 'avata' => $this->avata ? asset($this->avata) : null,
             'address' => $this->address,
             'gender' => $this->gender,
             'status' => $this->status,

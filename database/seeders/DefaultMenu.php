@@ -207,7 +207,7 @@ class DefaultMenu extends Seeder
                     'en' => 'Product Management'
                 ],
                 'icon' => "pi pi-th-large",
-                'linkTo' => "#",
+                'linkTo' => "/admin/product-management",
                 'status' => false,
                 'child' => []
             ],
