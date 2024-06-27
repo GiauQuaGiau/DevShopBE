@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Modules\Admin\Requests;
+namespace App\Modules\Admin\Auth\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Modules\Admin\DTO\AuthStoreDTO;
+use App\Modules\Admin\Auth\DTO\AuthStoreDTO;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 

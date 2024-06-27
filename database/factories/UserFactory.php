@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -14,21 +15,36 @@ class UserFactory extends Factory
     /**
      * The current password being used by the factory.
      */
-    protected static ?string $password;
+    // protected static ?string $password;
 
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
+    protected $model = User::class;
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            // 'name' => fake()->name(),
+            // 'email' => fake()->unique()->safeEmail(),
+            // 'email_verified_at' => now(),
+            // 'password' => Hash::make('hehehe'),
+            // 'remember_token' => "",
+            // 'remember_token' => (int)Str::random(1) % 2 == 0 ? "":"",
+            'firstname' => fake()->firstName(),
+            'middlename' => (int)Str::random(1) % 2 == 0 ? "Jr" : "J.k",
+            'lastname' => fake()->lastName(),
+            'phone' => fake()->phoneNumber(),
+            'avata' => null,
+            'gender' => (int)Str::random(1) % 2 == 0 ? "MALE" : "FEMALE",
+            'address' => fake()->address(),
+            'status' => (int)Str::random(1) % 2 == 0 ? "AC" : "IAC",
+            'username' => fake()->unique()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'password' => Hash::make('hehehe'),
+            'role' => 'customer',
+            'lang' => (int)Str::random(1) % 2 == 0 ? "vi" : "en",
         ];
     }
 

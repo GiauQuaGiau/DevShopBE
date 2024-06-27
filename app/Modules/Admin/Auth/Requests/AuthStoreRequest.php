@@ -1,7 +1,7 @@
 <?php
-namespace App\Modules\Admin\Requests;
+namespace App\Modules\Admin\Auth\Requests;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Modules\Admin\DTO\AuthStoreDTO;
+use App\Modules\Admin\Auth\DTO\AuthStoreDTO;
 
 
 class AuthStoreRequest extends FormRequest

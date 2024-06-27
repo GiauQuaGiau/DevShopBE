@@ -30,9 +30,25 @@ Route::get('/', function () {
 Route::group(
     [
         'prefix' => 'admin',
-        'middleware' => ['auth'],
     ],
     function () {
-        require_once app_path('Modules/Admin/Auth/routes.php');
+        $modules = [
+            'Auth',
+            'Config',
+            'User',
+        ];
+        foreach ($modules as $key => $value) {
+            require_once app_path("Modules/Admin/" . $value . "/routes.php");
+        }
+        Route::get('fake_user_data', function () {
+            try {
+                //code...
+                App\Models\User::factory()->count(40)->create();
+                return response()->json(['status' => 'ok'], 200);
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        });
     }
+
 );

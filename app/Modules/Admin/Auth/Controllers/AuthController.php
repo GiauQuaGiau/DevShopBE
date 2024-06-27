@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\app\Modules\Admin\Auth\Controllers;
+namespace App\Modules\Admin\Auth\Controllers;
 
 use App\Helpers\HttpStatusCodes;
-use App\Http\Controllers\app\Modules\Admin\Auth\Actions\LoginAction;
+use App\Modules\Admin\Auth\Actions\LoginAction;
 use App\Http\Controllers\Controller;
-use App\Modules\Admin\Requests\AuthRequest;
-use Illuminate\Http\Request;
+use App\Modules\Admin\Auth\Requests\AuthRequest;
+// use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
     //
+    public function __construct() {
+        // dd('AuthController');
+    }
     public function login(AuthRequest $request, LoginAction $loginAction)
     {
         try {

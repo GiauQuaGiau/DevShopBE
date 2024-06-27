@@ -14,39 +14,41 @@ class LoginData extends Seeder
      */
     public function run(): void
     {
-        User::insert(
+        $users = [
             [
-                [
-                    'firstname' => 'Duy',
-                    'middlename' => 'Khánh',
-                    'lastname' => 'Nguyễn',
-                    'phone' => '0943082871',
-                    'address' => 'Q12, TP HCM',
-                    'gender' => false,
-                    // 
-                    'username' => 'admin',
-                    'email' => 'admin@gmail.com',
-                    'password' => Hash::make('hehehe'),
-                    'lang' => 'en',
-                    'role' => 'admin',
-                    'created_at' => Carbon::now()->toDateTimeString()
-                ],
-                [
-                    'firstname' => 'Duy',
-                    'middlename' => '',
-                    'lastname' => 'Nguyễn',
-                    'phone' => '0943082871',
-                    'address' => 'Q12, TP HCM',
-                    'gender' => false,
-                    // 
-                    'username' => 'customer',
-                    'email' => 'customer@gmail.com',
-                    'password' => Hash::make('hehehe'),
-                    'lang' => 'vi',
-                    'role' => 'customer',
-                    'created_at' => Carbon::now()->toDateTimeString()
-                ],
-            ]
+                'firstname' => 'Duy',
+                'middlename' => 'Khánh',
+                'lastname' => 'Nguyễn',
+                'phone' => '0943082871',
+                'address' => 'Q12, TP HCM',
+                'gender' => "Male",
+                //
+                'username' => 'admin',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('hehehe'),
+                'lang' => 'en',
+                'role' => 'admin',
+                'created_at' => Carbon::now()->toDateTimeString()
+            ],
+            [
+                'firstname' => 'Duy',
+                'middlename' => '',
+                'lastname' => 'Nguyễn',
+                'phone' => '0943082871',
+                'address' => 'Q12, TP HCM',
+                'gender' => "Male",
+                //
+                'username' => 'customer',
+                'email' => 'customer@gmail.com',
+                'password' => Hash::make('hehehe'),
+                'lang' => 'vi',
+                'role' => 'customer',
+                'created_at' => Carbon::now()->toDateTimeString()
+            ],
+        ];
+
+        User::insert(
+            $users
         );
     }
 }

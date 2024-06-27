@@ -16,20 +16,20 @@ return new class extends Migration
             $table->string('firstname', 60);
             $table->string('middlename', 60)->nullable();
             $table->string('lastname', 60);
-            $table->string('phone', 15);
+            $table->string('phone', 20);
             $table->string('avata', 400)->nullable();
             $table->string('address', 400)->nullable();
-            $table->string('gender', 12);// 
+            $table->string('gender', 12);//
             $table->string('status', 12)->default('AC');//AC active | IAC inactive
 
-            // 
+            //
             $table->string('username', 100)->unique();
             $table->string('email', 100)->unique();
             $table->string('password', 200);
             // $table->string('role')->default('customer');
             $table->string('role')->default(2); //customer
             $table->string('lang', 10)->default('en');
-            // 
+            //
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
